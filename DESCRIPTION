@@ -11,9 +11,14 @@ Description: Implementation of corrected two sample tests. A corrected version o
  The package also proposes a test for the median. All these corrected tests are asymptotically calibrated meaning that
  the probability of rejection under the null hypothesis is asymptotically equal to 5%. The package also proposes a test for 
  independence between two continuous variables of Kolmogorov-Smirnov's type. This test is exact.
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)
+LinkingTo: 
+    Rcpp
+Imports: 
+    Rcpp
