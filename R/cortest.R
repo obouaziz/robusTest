@@ -140,7 +140,7 @@ cortest.default=function(x,y,alternative="two.sided",method="pearson",ties.break
     if((nb_dupliy+nb_duplix)!=0){
       #if ((length(x)!=length(unique(x)))|(length(Y)!=length(unique(Y)))) {
       if (ties.break=="none") {
-        warning("The data contains ties!")}
+        warning("The data contains ties! Use ties.break='random'")}
       if (ties.break=="random") {
         Message=TRUE
         if (nb_duplix!=0){
@@ -196,7 +196,7 @@ cortest.default=function(x,y,alternative="two.sided",method="pearson",ties.break
     if((nb_dupliy+nb_duplix)!=0){
       #if ((length(x)!=length(unique(x)))|(length(Y)!=length(unique(Y)))) {
       if (ties.break=="none") {
-        warning("The data contains ties!")}
+        warning("The data contains ties! Use ties.break='random'")}
       if (ties.break=="random") {
         Message=TRUE
         if (nb_duplix!=0){

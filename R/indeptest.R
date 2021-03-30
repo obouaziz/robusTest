@@ -86,9 +86,10 @@ indeptest.default<-function (x,y,N=50000,simu=FALSE,ties.break="none"){
   nb_dupliX=sum(dupliX)
   dupliY=duplicated(y)
   nb_dupliY=sum(dupliY)
-  if ((nb_dupliX+nb_dupliY)!=0){
+  ties=x%in%y
+  if ((nb_dupliX+nb_dupliY)!=0 | sum(ties)!=0){
     if (ties.break=="none") {
-      warning("The data contains ties!")}
+      warning("The data contains ties! Use ties.break='random'")}
     if (ties.break=="random") {
       Message=TRUE
       if (nb_dupliX!=0){
@@ -96,6 +97,8 @@ indeptest.default<-function (x,y,N=50000,simu=FALSE,ties.break="none"){
       if (nb_dupliY!=0){
         y[dupliY]=y[dupliY]+runif(nb_dupliY,-0.00001,0.00001)}
     }
+    if (sum(ties)!=0){
+    x[ties] <- x[ties]+runif(sum(ties),-0.00001,0.00001)}
   }
   if (simu==TRUE){
     ecdf_fun<-simulecdf(n,N)

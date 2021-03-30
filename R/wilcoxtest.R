@@ -93,7 +93,7 @@ wilcoxtest.default=function(x,y=NULL,alternative="two.sided",ties.break="none",p
     if (nb_dupliX!=0){
       #if ((length(X)!=length(unique(X)))){
       if (ties.break=="none") {
-        warning("The data contains ties!")}
+        warning("The data contains ties! Use ties.break='random'")}
       if (ties.break=="random") {
         X[dupliX]=X[dupliX]+runif(nb_dupliX,-0.00001,0.00001)
         #Xsort=sort(X,index.return=TRUE)
@@ -163,7 +163,7 @@ wilcoxtest.default=function(x,y=NULL,alternative="two.sided",ties.break="none",p
       ties=x%in%y
       if (sum(ties)!=0){
         if (ties.break=="none") {
-          warning("The data contains ties between the two vectors!")}
+          warning("The data contains ties between the two vectors! Use ties.break='random'")}
         if (ties.break=="random") {
           x[ties] <- x[ties]+runif(sum(ties),-0.00001,0.00001)
           Message=TRUE
