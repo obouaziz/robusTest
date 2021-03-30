@@ -96,9 +96,9 @@ indeptest.default<-function (x,y,N=50000,simu=FALSE,ties.break="none"){
         x[dupliX]=x[dupliX]+runif(nb_dupliX,-0.00001,0.00001)}
       if (nb_dupliY!=0){
         y[dupliY]=y[dupliY]+runif(nb_dupliY,-0.00001,0.00001)}
-    }
     if (sum(ties)!=0){
     x[ties] <- x[ties]+runif(sum(ties),-0.00001,0.00001)}
+    }
   }
   if (simu==TRUE){
     ecdf_fun<-simulecdf(n,N)

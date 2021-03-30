@@ -17,9 +17,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// spearmanCore
+List spearmanCore(const NumericVector& x, const NumericVector& y);
+RcppExport SEXP _robusTest_spearmanCore(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const NumericVector& >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(spearmanCore(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_robusTest_max2D_cpp", (DL_FUNC) &_robusTest_max2D_cpp, 2},
+    {"_robusTest_spearmanCore", (DL_FUNC) &_robusTest_spearmanCore, 2},
     {NULL, NULL, 0}
 };
 

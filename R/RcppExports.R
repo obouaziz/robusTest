@@ -13,6 +13,15 @@ NULL
 #' @param x,y the two sequences of vector that are applied to the function.
 #' @export
 max2D_cpp <- function(x, y) {
-    .Call('_robusTest_max2D_cpp', PACKAGE = 'robusTest', x, y)
+    .Call(`_robusTest_max2D_cpp`, x, y)
+}
+
+#' @useDynLib robusTest, .registration=TRUE
+#' @importFrom Rcpp sourceCpp
+NULL
+
+#' @export
+spearmanCore <- function(x, y) {
+    .Call(`_robusTest_spearmanCore`, x, y)
 }
 
