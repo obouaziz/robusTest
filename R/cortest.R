@@ -204,20 +204,6 @@ cortest.default=function(x,y,alternative="two.sided",method="pearson",ties.break
         if (nb_dupliy!=0){
           y[dupliy]=y[dupliy]+runif(nb_dupliy,-0.00001,0.00001)}
       }
-      # Xsort=sort(X,index.return=TRUE)
-      # if (sum(diff(Xsort$x)==0)>0) {
-      #   index=which(diff(Xsort$x)==0)#which value should be changed in the ordered sample
-      #   X[Xsort$ix[index]]<-X[Xsort$ix[index]]+runif(length(Xsort$ix[index]),-0.00001,0.00001)
-      # }
-      #   Ysort=sort(Y,index.return=TRUE)
-      #   if (sum(diff(Ysort$x)==0)>0) {
-      #     index=which(diff(Ysort$x)==0)#which value should be changed in the ordered sample
-      #     Y[Ysort$ix[index]]<-Y[Ysort$ix[index]]+runif(length(Ysort$ix[index]),-0.00001,0.00001)
-      #   }
-      #   #X=X+runif(length(X),-0.00001,0.00001) #break all values
-      #   #Y=Y+runif(length(Y),-0.00001,0.00001)
-      #   Message=TRUE
-      # }
     }
     cppRet = spearmanCore(x, y);
     H = cppRet$H;
@@ -225,33 +211,6 @@ cortest.default=function(x,y,alternative="two.sided",method="pearson",ties.break
     V<-16*var(H)
     estimate=3*sumR/(n^3-n)
     Tn<-sqrt(n)*sumR/(n*(n-1)*(n-2)*sqrt(V))
-    # R <- array(0,dim=c(n,n,n))
-    # S <- array(0,dim=c(n,n,n))
-    # HX <- array(0,dim=c(n,n))
-    # HY <- array(0,dim=c(n,n))
-    # for(i in 1:n)
-    # {
-    #   for(j in 1:n)
-    #   {
-    #     HX[i,j]<- (x[i]<x[j])
-    #     HY[i,j]<- (y[i]<y[j])
-    #     for(k in 1:n)
-    #     {
-    #       R[i,j,k]<-((x[i]-x[j])*(y[i]-y[k]))>0
-    #       R[i,j,k]<-2*(R[i,j,k]-0.5)
-    #       #R[i,j,j]=0
-    #       R[i,j,i]=0
-    #       R[i,i,k]=0
-    #       S[i,j,k]<-(x[i]<x[j]) & (y[i]<y[k])
-    #     }
-    #   }
-    # }
-    # Hprod<-apply(HX, 2, mean)*apply(HY, 2, mean) - apply(HX, 2, mean) - apply(HY, 2, mean)
-    # FXY<-apply(S, c(2,3), mean)
-    # H2<-apply(FXY,1,mean)+apply(FXY,2,mean)
-    # V<-16*var(H2+Hprod)
-    # estimate=3*sum(R)/(n^3-n)
-    # Tn<-sqrt(n)*sum(R)/(n*(n-1)*(n-2)*sqrt(V))
     if (alternative=="two.sided" | alternative=="t"){
       Pval <- 2*(1-pnorm(abs(Tn)))}
     if (alternative=="less"| alternative=="l"){
