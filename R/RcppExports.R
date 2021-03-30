@@ -20,6 +20,10 @@ max2D_cpp <- function(x, y) {
 #' @importFrom Rcpp sourceCpp
 NULL
 
+#' Compute a quantity used in the calculation of the Spearman correlation
+#'
+#' This is a fast function implemented in Rcpp.
+#' @param x,y the two sequences of vector that are applied to the function.
 #' @export
 spearmanCore <- function(x, y) {
     .Call(`_robusTest_spearmanCore`, x, y)

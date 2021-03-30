@@ -4,7 +4,14 @@
 \alias{indeptest}
 \title{Robust independence test for two continuous variables of Kolmogorov-Smirnov's type}
 \usage{
-indeptest(x, y, N = 50000, simu = FALSE, ties.break = "none")
+indeptest(
+  x,
+  y,
+  N = 50000,
+  simu = FALSE,
+  ties.break = "none",
+  nb_tiebreak = 100
+)
 }
 \arguments{
 \item{x, y}{the two continuous variables. Must be of same length.}
@@ -15,7 +22,10 @@ indeptest(x, y, N = 50000, simu = FALSE, ties.break = "none")
 distribution of the test statistic under the null hypothesis. If FALSE, pre computed tables are used (see Details
 for more information).}
 
-\item{ties.break}{the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"} or \code{"random"}.}
+\item{ties.break}{the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"},
+\code{"random"} or \code{"rep_random"}.}
+
+\item{nb_tiebreak}{the number of repetition for breaking the ties when \code{ties.break="rep_random"}.}
 }
 \value{
 Returns the result of the test with its corresponding p-value and the value of the test statistic.
@@ -51,7 +61,9 @@ Only a two sided alternative is possible with this test. Missing values are remo
 of \code{x} (resp. \code{y}) is missing then the corresponding
 values of both \code{x} and \code{y} are removed. The test is then implemented on the remaining elements. If \code{ties.break="none"} the ties are ignored, putting
 mass (nb of ties)/n at tied observations in the computation of the empirical cumulative distribution functions.
-If \code{ties.break="random"} they are randomly broken.
+If \code{ties.break="random"} they are randomly broken. If \code{ties.break="rep_random"} they are randomly broken \code{nb_tiebreak}
+times where \code{nb_tiebreak} is a parameter of the function. In that case, the test statistic and the p values are computed by taking
+the average over all replications.
 
 This function is implemented using the Rcpp package.
 }
@@ -76,6 +88,13 @@ with(Evans,cor.test(CHL[CDH==1],DBP[CDH==1])) #the standard Pearson test
 with(Evans,cortest(CHL[CDH==1],DBP[CDH==1])) #the robust Pearson test
 with(Evans,indeptest(CHL[CDH==1],DBP[CDH==1])) #the robust independence test
 #The robust tests give very different pvalues than the standard Pearson test!
+
+#Breaking the ties
+#The ties are broken once
+with(Evans,indeptest(CHL[CDH==1],DBP[CDH==1],ties.break="random"))
+#The ties are broken repetively and the average of the test statistics and p.values
+#are taken
+with(Evans,indeptest(CHL[CDH==1],DBP[CDH==1],ties.break="rep_random",nb_tiebreak=100))
 }
 \seealso{
 \code{\link{cortest}}, \code{\link{vartest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.

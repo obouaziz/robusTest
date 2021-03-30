@@ -39,6 +39,10 @@ vector<size_t> invPerm(const vector<size_t>& sigma) {
   return ret;
 }
 
+//' Compute a quantity used in the calculation of the Spearman correlation
+//'
+//' This is a fast function implemented in Rcpp.
+//' @param x,y the two sequences of vector that are applied to the function.
 //' @export
 // [[Rcpp::export]]
 List spearmanCore(const NumericVector& x, const NumericVector& y) {

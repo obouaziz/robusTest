@@ -272,7 +272,10 @@ print.test <- function(x, ...)
   if (x$method=="pearson"){
     names(corval)<-"cor"
     cat("\nCorrected Pearson correlation test\n\n")
-    cat(paste("t = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))
+    if (round(x$p.value,4)==0){
+      cat(paste("t = ", round(x$statistic,4), ", " , "p-value <1e-4","\n",sep= ""))
+    } else {
+    cat(paste("t = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))}
     if (x$alternative=="two.sided" | x$alternative=="t"){
       cat("alternative hypothesis: true correlation is not equal to 0\n")
       #print(x$CI)
@@ -290,7 +293,10 @@ print.test <- function(x, ...)
   if (x$method=="kendall"){
     names(corval)<-"tau"
     cat("\nCorrected Kendall correlation test\n\n")
-    cat(paste("t = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))
+    if (round(x$p.value,4)==0){
+      cat(paste("t = ", round(x$statistic,4), ", " , "p-value <1e-4","\n",sep= ""))
+    } else {
+    cat(paste("t = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))}
     if (x$alternative=="two.sided" | x$alternative=="t"){
       cat("alternative hypothesis: true tau is not equal to 0\n")}
     if (x$alternative=="less" | x$alternative=="l"){
@@ -307,7 +313,10 @@ print.test <- function(x, ...)
   if (x$method=="spearman"){
     names(corval)<-"rho"
     cat("\nCorrected Spearman correlation test\n\n")
-    cat(paste("S = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))
+    if (round(x$p.value,4)==0){
+      cat(paste("t = ", round(x$statistic,4), ", " , "p-value <1e-4","\n",sep= ""))
+    } else {
+    cat(paste("S = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))}
     if (x$alternative=="two.sided" | x$alternative=="t"){
       cat("alternative hypothesis: true rho is not equal to 0\n")}
     if (x$alternative=="less" | x$alternative=="l"){
