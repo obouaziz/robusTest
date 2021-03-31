@@ -5,13 +5,6 @@
 #' @importFrom Rcpp sourceCpp
 NULL
 
-#' Compute the test statistic for the robust independence test of Kolmogorov-Smirnov's type
-#'
-#' Compute the maximum distance between the joint empirical cumulative
-#' distribution function (e.c.d.f.) and the product of the marginals e.c.d.f.
-#' multiplied by square root of n
-#' @param x,y the two sequences of vector that are applied to the function.
-#' @export
 max2D_cpp <- function(x, y) {
     .Call(`_robusTest_max2D_cpp`, x, y)
 }

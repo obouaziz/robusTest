@@ -30,13 +30,7 @@ vector<size_t> argsort(const NumericVector& v) {
   return idx;
 }
 
-//' Compute the test statistic for the robust independence test of Kolmogorov-Smirnov's type
-//'
-//' Compute the maximum distance between the joint empirical cumulative
-//' distribution function (e.c.d.f.) and the product of the marginals e.c.d.f.
-//' multiplied by square root of n
-//' @param x,y the two sequences of vector that are applied to the function.
-//' @export
+
 // [[Rcpp::export]]
 double max2D_cpp(NumericVector const& x, NumericVector const& y) {
   size_t n = x.size();

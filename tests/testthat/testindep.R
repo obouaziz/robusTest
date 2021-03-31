@@ -24,3 +24,28 @@ test_that("warning for indeptest when there are ties",{
   expect_warning(indeptest(x2,y2))
   expect_silent(indeptest(x2,y2,ties.break = "random"))
 })
+
+n=40
+power_res=rep(NA,1000)
+for (i in 1:1000)
+{
+  x<-rnorm(n)
+  y<-x^2+0.3*rnorm(n)
+  power_res[i]=indeptest(x,y)$p.value
+}
+
+reject_res=rep(NA,1000)
+for (i in 1:1000)
+{
+  x<-rnorm(n)
+  y<-rnorm(n)
+  reject_res[i]=indeptest(x,y)$p.value
+}
+skip_on_cran()
+test_that("indeptest has the correct rejection rate in a simulation setting",{
+  expect_gt(mean(reject_res<=0.05),0.03)
+  expect_lt(mean(reject_res<=0.05),0.07)
+})
+
+
+
