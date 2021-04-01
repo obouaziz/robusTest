@@ -53,7 +53,7 @@ test_that("indeptest has the correct rejection rate in a simulation setting",{
 # y<-0.01*x^2+rnorm(n)
 # result=indeptest(x,y)
 # result$statistic #0.5973543
-# result$p.value#0.47778
+# result$p.value#0.476434
 #
 # set.seed(1)
 # n<-40
@@ -61,7 +61,7 @@ test_that("indeptest has the correct rejection rate in a simulation setting",{
 # y<-0.1*x^2+rnorm(n)
 # result=indeptest(x,y)
 # result$statistic #0.54154
-# result$p.value#0.47368
+# result$p.value#0.472538
 #
 # set.seed(1)
 # n<-80
@@ -69,7 +69,7 @@ test_that("indeptest has the correct rejection rate in a simulation setting",{
 # y<-0.1*x^2+rnorm(n)
 # result=indeptest(x,y)
 # result$statistic #0.5757875
-# result$p.value# 0.42917
+# result$p.value# 0.425226
 #
 #
 # set.seed(1)
@@ -78,7 +78,7 @@ test_that("indeptest has the correct rejection rate in a simulation setting",{
 # y<-0.1*x^2+rnorm(n)
 # result=indeptest(x,y)
 # result$statistic #0.6672388
-# result$p.value# 0.21169
+# result$p.value# 0.21383
 #
 # set.seed(1)
 # n<-140
@@ -86,8 +86,8 @@ test_that("indeptest has the correct rejection rate in a simulation setting",{
 # y<-0.5*x^2+rnorm(n)
 # result=indeptest(x,y)
 # result$statistic #0.5433134
-# result$p.value# 0.58467
-#
+# result$p.value# 0.582986
+
 #
 #
 #
