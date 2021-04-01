@@ -172,49 +172,50 @@ pval_comput<-function(x,y,simu=FALSE,N=50000){
     ecdf_fun<-simulecdf(n,N)
     Pval<-1-ecdf_fun(Tn)
   } else {
+    y1<-(1:(5e5))/(5e5)
     #data(ecdf10.Rdata, envir=environment())#paste(ecdf,n,.Rdata,sep="")
     #load(paste("ecdf",n,".Rdata",sep=""))#Tables/
     if (3<=n & n<=150)
     {
-      x1<-robust_table[[n]]$x
-      y1<-robust_table[[n]]$y
-      #load(system.file(paste("data_tables/ecdf",n,".RData",sep=""),package="testRcpp"))
-      #data(list=paste("ecdf",n,sep=""))
+      x1<-robust_table_indep[[n]]#$x
+      #y1<-robust_table[[n]]$y
+      ##load(system.file(paste("data_tables/ecdf",n,".RData",sep=""),package="testRcpp"))
+      ##data(list=paste("ecdf",n,sep=""))
     } else {
       if (151<=n & n<=175)
       {
-        x1<-robust_table[[150]]$x
-        y1<-robust_table[[150]]$y
-        #load(system.file("data_tables/ecdf150.RData",package="testRcpp"))
-        #data(ecdf150)
+        x1<-robust_table_indep[[150]]#$x
+        #y1<-robust_table[[150]]$y
+        ##load(system.file("data_tables/ecdf150.RData",package="testRcpp"))
+        ##data(ecdf150)
       } else {
         if (176<=n & n<=250)
         {
-          x1<-robust_table[[151]]$x
-          y1<-robust_table[[151]]$y
-          #load(system.file("data_tables/ecdf200.RData",package="testRcpp"))
-          #data(ecdf200)
+          x1<-robust_table_indep[[151]]#$x
+          #y1<-robust_table[[151]]$y
+          ##load(system.file("data_tables/ecdf200.RData",package="testRcpp"))
+          ##data(ecdf200)
         } else {
           if (251<=n & n<=400)
           {
-            x1<-robust_table[[152]]$x
-            y1<-robust_table[[152]]$y
-            #load(system.file("data_tables/ecdf300.RData",package="testRcpp"))
-            #data(ecdf300)
+            x1<-robust_table_indep[[152]]#$x
+            #y1<-robust_table[[152]]$y
+            ##load(system.file("data_tables/ecdf300.RData",package="testRcpp"))
+            ##data(ecdf300)
           } else {
             if (401<=n & n<=750)
             {
-              x1<-robust_table[[153]]$x
-              y1<-robust_table[[153]]$y
-              #load(system.file("data_tables/ecdf500.RData",package="testRcpp"))
-              #data(ecdf500)
+              x1<-robust_table_indep[[153]]#$x
+              #y1<-robust_table[[153]]$y
+              ##load(system.file("data_tables/ecdf500.RData",package="testRcpp"))
+              ##data(ecdf500)
             } else {
               if (751<=n)
               {
-                x1<-robust_table[[154]]$x
-                y1<-robust_table[[154]]$y
-                #load(system.file("data_tables/ecdf1000.RData",package="testRcpp"))
-                #data(ecdf1000)
+                x1<-robust_table_indep[[154]]#$x
+                #y1<-robust_table[[154]]$y
+                ##load(system.file("data_tables/ecdf1000.RData",package="testRcpp"))
+                ##data(ecdf1000)
               }
             }
           }

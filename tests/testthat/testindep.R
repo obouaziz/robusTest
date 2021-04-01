@@ -47,5 +47,48 @@ test_that("indeptest has the correct rejection rate in a simulation setting",{
   expect_lt(mean(reject_res<=0.05),0.07)
 })
 
-
-
+# set.seed(1)
+# n<-4000
+# x<-rnorm(n)
+# y<-0.01*x^2+rnorm(n)
+# result=indeptest(x,y)
+# result$statistic #0.5973543
+# result$p.value#0.47778
+#
+# set.seed(1)
+# n<-40
+# x<-rnorm(n)
+# y<-0.1*x^2+rnorm(n)
+# result=indeptest(x,y)
+# result$statistic #0.54154
+# result$p.value#0.47368
+#
+# set.seed(1)
+# n<-80
+# x<-rnorm(n)
+# y<-0.1*x^2+rnorm(n)
+# result=indeptest(x,y)
+# result$statistic #0.5757875
+# result$p.value# 0.42917
+#
+#
+# set.seed(1)
+# n<-130
+# x<-rnorm(n)
+# y<-0.1*x^2+rnorm(n)
+# result=indeptest(x,y)
+# result$statistic #0.6672388
+# result$p.value# 0.21169
+#
+# set.seed(1)
+# n<-140
+# x<-rnorm(n)
+# y<-0.5*x^2+rnorm(n)
+# result=indeptest(x,y)
+# result$statistic #0.5433134
+# result$p.value# 0.58467
+#
+#
+#
+#
+#
