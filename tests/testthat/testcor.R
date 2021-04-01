@@ -38,7 +38,7 @@ x<-rnorm(n)
 y<-0.1*x^2+rnorm(n)
 # result=cortest(x,y)
 # result$statistic # 1.289596
-# result$p.value# 0.204985
+# result$p.value# 0.22207
 
 test_that("Pearson pvalue is correct on simulation 2",{
   expect_equal(round(cortest(x,y)$p.value,2),0.22)
@@ -50,7 +50,7 @@ x<-rnorm(n)
 y<-0.1*x^2+rnorm(n)
 # result=cortest(x,y)
 # result$statistic #-2.100994
-# result$p.value# 0.03887128
+# result$p.value# 0.03901
 
 test_that("Pearson pvalue is correct on simulation 3",{
   expect_equal(round(cortest(x,y)$p.value,2),0.04)

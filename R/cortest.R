@@ -295,10 +295,10 @@ print.test <- function(x, ...)
 
 pval_pear_alt_two<-function(Tn,n)
 {
-  if (n<=150){
+  if (n<=129){
     y1<-(1:(2e5))/(2e5)
     y1<-y1[seq(1,2e5,by=6)]
-    x1<-robust_Pearson_table[[n]]$x
+    x1<-robust_Pearson_table[[n]]
     funstep<-stats::stepfun(x1,c(0,y1))
     Pval<-2*(1-funstep(abs(Tn)))
   } else {
@@ -309,10 +309,10 @@ pval_pear_alt_two<-function(Tn,n)
 
 pval_pear_alt_less<-function(Tn,n)
 {
-  if (n<=150){
+  if (n<=129){
     y1<-(1:(2e5))/(2e5)
     y1<-y1[seq(1,2e5,by=6)]
-    x1<-robust_Pearson_table[[n]]$x
+    x1<-robust_Pearson_table[[n]]
     funstep<-stats::stepfun(x1,c(0,y1))
     Pval<-funstep(Tn)
   } else {
@@ -323,10 +323,10 @@ pval_pear_alt_less<-function(Tn,n)
 
 pval_pear_alt_great<-function(Tn,n)
 {
-  if (n<=150){
+  if (n<=129){
     y1<-(1:(2e5))/(2e5)
     y1<-y1[seq(1,2e5,by=6)]
-    x1<-robust_Pearson_table[[n]]$x
+    x1<-robust_Pearson_table[[n]]
     funstep<-stats::stepfun(x1,c(0,y1))
     Pval<-1-funstep(Tn)
   } else {
