@@ -185,8 +185,8 @@ pval_comput<-function(x,y,simu=FALSE,N=50000){
     } else {
       if (151<=n & n<=175)
       {
-        x<-robust_table_indep[[150]]$x
-        y<-robust_table_indep[[150]]$y
+        x1<-robust_table_indep[[150]]$x
+        y1<-robust_table_indep[[150]]$y
         #y1<-robust_table[[150]]$y
         ##load(system.file("data_tables/ecdf150.RData",package="testRcpp"))
         ##data(ecdf150)
