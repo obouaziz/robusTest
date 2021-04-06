@@ -92,7 +92,7 @@ indeptest.default<-function (x,y,N=50000,simu=FALSE,ties.break="none",nb_tiebrea
     x<-x[-na.ind];y<-y[-na.ind]
   }
   n <- length(x)
-  if (n<3) stop("length of 'x' and 'y' must be greater than 2")
+  if (n<3) stop("lengths of 'x' and 'y' must be greater than 2")
   if (ties.break=="rep_random"){
     dupliX=duplicated(x)
     nb_dupliX=sum(dupliX)
