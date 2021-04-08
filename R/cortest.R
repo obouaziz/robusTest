@@ -1,6 +1,6 @@
 #' Calibrated tests for correlation between paired samples
 #'
-#' Tests the association/correlation for continuous paired samples using corrected versions of the Pearson's correlation test, Kendall's tau test and Spearman's rho test. These three tests are asymptotically calibrated.
+#' Tests the association/correlation for continuous paired samples using corrected versions of Pearson's correlation test, Kendall's tau test and Spearman's rho test. These three tests are asymptotically calibrated.
 #' @param x,y the two continuous variables. Must be of same length.
 #' @param alternative indicates the alternative hypothesis and must be one of "two.sided", "greater" or "less".
 #' @param method a character string indicating which test to implement. Can be \code{"pearson"}, \code{"kendall"} or \code{"spearman"}.
@@ -10,12 +10,17 @@
 #' The alternative is specified by the \code{alternative} argument. The null hypothesis for the corrected Kendall test is: H0 tau=0 where tau represents the Kendall's tau coefficient.
 #' The null hypothesis for the corrected Spearman test is: H0 rho=0 where rho represents the Spearman's rho coefficient.
 #' All tests are asymptotically calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test.
+#'
+#' When the Pearson's correlation test is used, a confidence interval for the Pearson correlation coefficient is also returned. This confidence interval has been implemented
+#' from the delta-method. It should be noted that this method is asymptotic and can display very narrow intervals for small sample sizes and thus can suffer from
+#' low coverage probabilities. We therefore advocate to use confidence intervals for the Pearson coefficient only when n is at least larger than 100.
 #' @return Returns the result of the test with its corresponding p-value, the value of the test statistic and the estimated value of the Pearson correlation coefficient,
 #' Kendall's tau or Spearman's rho. For the Pearson's correlation test an asymptotic confidence interval for the correlation coefficient is also returned.
 #' @note The option \code{ties.break} handles ties in the Kendall and Spearman test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
 #' Note that only the ties inside each vector are broken (but not ties between vectors).
 #' @keywords test
 #' @seealso \code{\link{vartest}}, \code{\link{indeptest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
+#' @importFrom stats cov pnorm pt qnorm qt runif sd var
 #' @export
 #' @examples
 #' #Application on the Evans dataset
@@ -243,7 +248,7 @@ print.test <- function(x, ...)
     if (x$alternative=="greater" | x$alternative=="g"){
       cat("alternative hypothesis: true correlation is greater than 0\n")
     }
-    cat(paste(x$conf.level," % confidence interval for the correlation coefficient:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
+    cat(paste(x$conf.level," % asymptotic confidence interval for the correlation coefficient:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
     cat("sample estimates:\n")
     print(corval)
   }

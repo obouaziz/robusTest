@@ -29,13 +29,17 @@ Returns the result of the test with its corresponding p-value, the value of the 
 Kendall's tau or Spearman's rho. For the Pearson's correlation test an asymptotic confidence interval for the correlation coefficient is also returned.
 }
 \description{
-Tests the association/correlation for continuous paired samples using corrected versions of the Pearson's correlation test, Kendall's tau test and Spearman's rho test. These three tests are asymptotically calibrated.
+Tests the association/correlation for continuous paired samples using corrected versions of Pearson's correlation test, Kendall's tau test and Spearman's rho test. These three tests are asymptotically calibrated.
 }
 \details{
 Three tests are implemented. The null hypothesis for the corrected Pearson test is: H0 Cor(X,Y)=0 where Cor represents the Pearson correlation coefficient.
 The alternative is specified by the \code{alternative} argument. The null hypothesis for the corrected Kendall test is: H0 tau=0 where tau represents the Kendall's tau coefficient.
 The null hypothesis for the corrected Spearman test is: H0 rho=0 where rho represents the Spearman's rho coefficient.
 All tests are asymptotically calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test.
+
+When the Pearson's correlation test is used, a confidence interval for the Pearson correlation coefficient is also returned. This confidence interval has been implemented
+from the delta-method. It should be noted that this method is asymptotic and can display very narrow intervals for small sample sizes and thus can suffer from
+low coverage probabilities. We therefore advocate to use confidence intervals for the Pearson coefficient only when n is at least larger than 100.
 }
 \note{
 The option \code{ties.break} handles ties in the Kendall and Spearman test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
