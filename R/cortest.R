@@ -118,6 +118,8 @@ cortest.default=function(x,y,alternative="two.sided",method="pearson",ties.break
       #Pval <- 2*(1-pt(abs(Tn),n-2))
       CIl <- estimate-qt(1-alpha/2,n-2)*sqrt(varlim/n)
       CIr <- estimate+qt(1-alpha/2,n-2)*sqrt(varlim/n)
+      if (CIl<(-1)) { CIl<-(-1)}
+      if (CIr>1) { CIr<-1}
     }
     #CIl <- (-qt(1-alpha/2,n-2)*deno+num)/cor_denom #does not work!!!
     #CIr <- (qt(1-alpha/2,n-2)*deno+num)/cor_denom} #does not work!!!
