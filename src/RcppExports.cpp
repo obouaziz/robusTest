@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // max2D_cpp
 double max2D_cpp(NumericVector const& x, NumericVector const& y);
 RcppExport SEXP _robusTest_max2D_cpp(SEXP xSEXP, SEXP ySEXP) {

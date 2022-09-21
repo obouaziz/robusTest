@@ -9,8 +9,8 @@ medianCI(x, y = NULL, paired = FALSE, conf.level = 0.95)
 \arguments{
 \item{x, y}{two continuous variables.}
 
-\item{paired}{a logical value. If it equals TRUE, you must provide values for \code{x} and \code{y}
-and the paired test is implemented. If it equals FALSE, only \code{x} must be provided.}
+\item{paired}{a logical value. If \code{paired=TRUE}, you must provide values for \code{x} and \code{y}
+and the paired test is implemented. If it equals \code{paired=FALSE}, only \code{x} must be provided.}
 
 \item{conf.level}{confidence level for the confidence interval.}
 }
@@ -31,7 +31,7 @@ one vector equal to the difference between \code{x} and \code{y}.
 }
 \examples{
 #Simulations
-n=100
+n=100 #sample size
 M=2000 #number of replications
 res1=res2=res3=rep(NA,M)
 testone=function(n){

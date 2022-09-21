@@ -1,12 +1,12 @@
 #' Evans County dataset
 #'
-#' Data from cohort study in which white males in Evans County were followed for 7 years,
-#' with coronary heart disease as the outcome of interest. This dataset comes the
+#' Data from cohort study in which white males in Evans County were followed for seven years,
+#' with coronary heart disease as the outcome of interest. This dataset comes from the
 #' \code{lbref} package.
 #'
 #' @format A data frame with 609 rows and 9 variables:
 #' \describe{
-#'   \item{CDH}{outcome variable; 1 = coronarty disease}
+#'   \item{CDH}{outcome variable; 1 = coronary disease}
 #'   \item{CAT}{1 = high, 0 = normal catecholamine level}
 #'   \item{AGE}{age (in years)}
 #'   \item{CHL}{cholesterol, mg/dl}

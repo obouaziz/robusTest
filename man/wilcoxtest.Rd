@@ -14,14 +14,14 @@ wilcoxtest(
 )
 }
 \arguments{
-\item{x, y}{the two continuous variables.}
+\item{x, y}{two continuous variables.}
 
 \item{alternative}{indicates the alternative hypothesis and must be one of "two.sided", "greater" or "less".}
 
 \item{ties.break}{the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"} or \code{"random"}.}
 
-\item{paired}{a logical value. If it equals TRUE, you must provide values for \code{x} and \code{y}
-and the paired test is implemented. If it equals FALSE, the paired test is implemented when \code{y} is null and
+\item{paired}{a logical value. If \code{paired=TRUE}, you must provide values for \code{x} and \code{y} (of same length)
+and the paired test is implemented. If \code{paired=FALSE}, the paired test is implemented when \code{y} is null and
 only \code{x} is provided and the two sample test (for independent variables) is implemented when both \code{x} and \code{y} are provided.}
 
 \item{...}{it is possible to use a formula with or without specifying a dataset
@@ -32,13 +32,13 @@ Returns the result of the test with its corresponding p-value and the value of t
 }
 \description{
 Compares the distribution between two random variables by testing if one variable tends to take larger (or smaller) values than the other. The test
-works for independant and paired variables by using corrected versions of the Wilcoxon (or equivalently Mann-Whitney) one and two-sample tests.
+works for independent and paired variables by using corrected versions of the Wilcoxon (or equivalently Mann-Whitney in the two-sample case) for one and two-sample tests.
 }
 \details{
-The null hypothesis for the corrected Wilcoxon (Mann-Whitney) test is: H0 Med(X-Y)=0 where Med represents the median.
+For two independent samples, the null hypothesis for the corrected Wilcoxon (Mann-Whitney) test is: H0 Med(X-Y)=0 where Med represents the median.
 The alternative is specified by the \code{alternative} argument: "\code{greater}" means that Med(X-Y)>0 and "\code{less}"
-means that Med(X-Y)<0. The null hypothesis for the paired Wilcoxon (Mann-Whitney) test is: H0 Med(D1+D2)=0 where D1 is the difference
-between X1 and Y1 taken on the same pair (same with D2 on a different pair). Both tests are asymptotically calibrated in the sense that the rejection probability under the
+means that Med(X-Y)<0. The null hypothesis for the paired Wilcoxon test is: H0 Med(D1+D2)=0 where D1 is the difference
+between X1 and Y1 taken on the same pair (same with D2 on a different pair). Both tests are asymptotically well calibrated in the sense that the rejection probability under the
 null hypothesis is asymptotically equal to the level of the test.
 }
 \note{
@@ -56,11 +56,11 @@ with(Evans,wilcox.test(CHL[CDH==0],CHL[CDH==1]))
 with(Evans,wilcoxtest(CHL[CDH==0],CHL[CDH==1]))
 wilcoxtest(CHL~CDH,data=Evans) #using formulas
 wilcoxtest(CHL~CDH,data=Evans,ties.break="random")
-#same test were ties are randomly broken
+#the same test where ties are randomly broken
 
 
 #For independent samples
-n=100
+n=100 #sample size
 M=1000 #number of replications
 testone=function(n){
 X=runif(n,-0.5,0.5)
@@ -84,7 +84,7 @@ mean(res2<0.05) #0.174
 #We use the value of the median of a Gamma distributed variable with shape
 #parameter equal to 1/5 and scale parameter equal to 1. This value is
 #computed from the command qgamma(shape=1/5, scale=1, 0.5)
-n=100
+n=100 #sample size
 M=1000 #number of replications
 testone=function(n){
 D=rgamma(n,shape=1/10,scale=1)-qgamma(shape=1/5, scale=1, 0.5)/2

@@ -15,10 +15,10 @@ tiebreak(x, y = NULL, nb_break = FALSE)
 If the vector contains ties (either inside a single or between two vectors), the function breaks them using a random perturbation.
 }
 \details{
-If \code{y=NULL} the function detects the ties in the vector \code{x}. A uniform variable with parameters \eqn{[-e^(-5),e^(-5)]} is added
+If \code{y=NULL} the function detects the ties in the vector \code{x}. A uniform variable on the interval \eqn{[-e^(-5),e^(-5)]} is added
 to the value of all the ties but one in the vector \code{x}. If \code{y} is also provided, the function detects the ties between
-\code{x} and \code{y} and break them (only in the \code{x} vector) by adding a uniform variable with parameters \eqn{[-e^(-5),e^(-5)]} to these values.
-If \code{nb_break} equals TRUE the result is returned as a list that also includes the number of values that have been broken.
+\code{x} and \code{y} and break them (only in the \code{x} vector) by adding a uniform variable on the interval \eqn{[-e^(-5),e^(-5)]} to these values.
+If \code{nb_break=TRUE} the result is returned as a list that also includes the number of values that have been broken.
 }
 \examples{
 x <- c(1,2,2,3,4,5,5,5,7)

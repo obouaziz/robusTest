@@ -11,8 +11,8 @@ mediantest(x, y = NULL, alternative = "two.sided", paired = FALSE)
 
 \item{alternative}{indicates the alternative hypothesis and must be one of "two.sided", "greater" or "less".}
 
-\item{paired}{a logical value. If it equals TRUE, you must provide values for \code{x} and \code{y}
-and the paired test is implemented. If it equals FALSE, only \code{x} must be provided.}
+\item{paired}{a logical value. If \code{paired=TRUE}, you must provide values for \code{x} and \code{y}
+and the paired test is implemented. If \code{paired=FALSE}, only \code{x} must be provided.}
 }
 \value{
 Returns the result of the test with its corresponding p-value and the value of the test statistic.
@@ -23,11 +23,11 @@ difference between the two random variables is equal to 0.
 }
 \details{
 The null hypothesis for the one sample median test is: H0 Med(X)=0 where Med represents the median.
-The alternative is specified by the \code{alternative} argument: "\code{greater}" means that Med(X)>0 and "\code{less}"
-means that Med(X)<0. The null hypothesis for the paired median test is: H0 Med(X-Y)=0. Both tests are asymptotically
+The alternative is specified by the \code{alternative} argument: "\code{greater}" means that Med(X)>0, "\code{less}"
+means that Med(X)<0 and "\code{two.sided} means that Med(X) is different from 0. The null hypothesis for the paired median test is: H0 Med(X-Y)=0. Both tests are asymptotically
 calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test. The
-test is based on the asymptotic law of the empirical median and uses a kernel estimator to estimate the density of \code{X} (in the one sample case)
-or of \code{X-Y} in the two sample case at 0.
+test is based on the asymptotic distribution of the empirical median and uses a kernel estimator to estimate the density of \code{X} (in the one sample case)
+or of \code{X-Y} (in the two sample case) at 0.
 }
 \note{
 The paired median test can be implemented by providing the variables \code{x} and \code{y} or by just providing
@@ -35,7 +35,7 @@ one vector equal to the difference between \code{x} and \code{y}.
 }
 \examples{
 #Simulations
-n=100
+n=100 #sample size
 M=1000 #number of replications
 res1=res2=rep(NA,M)
 testone=function(n){

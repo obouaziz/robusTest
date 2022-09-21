@@ -18,13 +18,13 @@ Returns the result of the test with its corresponding p-value and the value of t
 also returns the estimated value of the ratio of the two variances.
 }
 \description{
-Tests the equality of variance for continuous independent samples using the Welch corrected versions of the Fisher's variance test
+Tests the equality of variance for continuous independent samples using Welch's ANOVA on the square of the centered variables.
 }
 \details{
 For the two sample variance test, the null hypothesis is: H0 var(X)=var(Y) where var represents the variance.
 The alternative is specified by the \code{alternative} argument.
-The test uses the Welch correction for the variables \eqn{(x_i-mean(x))^2}, \eqn{(y_i-mean(y))^2} and is asymptotically calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test.
-The test can be applied to more than two groups and it will test if all groups have the same variance.
+The test uses Welch's ANOVA procedure on the variables \eqn{(x_i-mean(x))^2}, \eqn{(y_i-mean(y))^2} and is asymptotically well calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test.
+The test can be applied to more than two groups in which case it tests if all groups have the same variance.
 }
 \note{
 The function can also be called using formulas: type \code{vartest(x~y,data)} with x the quantitative variable
@@ -41,7 +41,7 @@ vartest(CHL~CDH,data=Evans) #using formulas
 #Similar pvalues between var.test and vartest
 
 #Simulated data
-n=60
+n=60 #sample size
 M=10000 #number of replications
 testone=function(n){
 X=rnorm(n,0,1)
@@ -49,7 +49,7 @@ Y=rchisq(2*n,df=2)/2
 list(test1=vartest(X,Y)$p.value,test2=var.test(X,Y)$p.value) #var.test is the standard Fisher test
 }
 res1=res2=rep(NA,M)
-# Replications to check if the the corrected Fisher test and the standard test are well calibrated
+# Replications to check if the corrected Fisher test and the standard test are well calibrated
 for (i in 1:M)
 {
 result=testone(n)

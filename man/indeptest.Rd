@@ -36,7 +36,7 @@ between the joint empirical cumulative distribution function and the product of 
 empirical cumulative distribution functions.
 }
 \details{
-For two continuous variables, robustest tests H0 X and Y are independent
+For two continuous variables, indeptest tests H0 X and Y are independent
 against H1 X and Y are not independent.
 
 For observations (x1,y1), ..., (x_n,y_n), the bivariate e.c.d.f.
@@ -46,12 +46,12 @@ For observations (x1,y1), ..., (x_n,y_n), the bivariate e.c.d.f.
 Let Fn(t1) and Fn(t2) be the marginals e.c.d.f. The test statistic is defined as:
 \deqn{n^(1/2) sup_{t1,t2} |Fn(t1,t2)-Fn(t1)*Fn(t2)|.}
 
-Under H0 the distribution of the test statistic is free and is equivalent to
+Under H0 the test statistic is distribution free and is equivalent to
 the same test statistic computed for two independent continuous uniform variables in \eqn{[0,1]},
 where the supremum is taken for t1,t2 in \eqn{[0,1]}. Using this result, the distribution of the test
 statistic is obtained using Monte-Carlo simulations. The user can either use the argument simu=TRUE to
 perform the Monte-Carlo simulation (with N the number of replications) or simply use the available tables
-by choosing simu=FALSE. In the latter case, the exact distribution is computed for n=1, ...,150. For \eqn{151<=n<=175}, the
+by choosing simu=FALSE. In the latter case, the exact distribution is estimated for n=1, ...,150. For \eqn{151<=n<=175}, the
 distribution with n=150 is used. For \eqn{176<=n<=250}, the distribution with n=200 is used.
 For \eqn{251<=n<=400}, the distribution with n=300 is used. For \eqn{401<=n<=750}, the distribution with n=500 is used.
 For \eqn{n>=751}, the distribution with n=1000 is used. Those tables were computed using 1e^5 replications.
@@ -74,7 +74,7 @@ y<-c(0.5, 0.4, 0.05, 0.2)
 indeptest(x,y)
 
 #Simulated data 2
-n<-40
+n<-40 #sample size
 x<-rnorm(n)
 y<-x^2+0.3*rnorm(n)
 plot(x,y)
@@ -92,8 +92,8 @@ with(Evans,indeptest(CHL[CDH==1],DBP[CDH==1])) #the robust independence test
 #Breaking the ties
 #The ties are broken once
 with(Evans,indeptest(CHL[CDH==1],DBP[CDH==1],ties.break="random"))
-#The ties are broken repetively and the average of the test statistics and p.values
-#are taken
+#The ties are broken repeatedly and the average of the test statistics and p.values
+#are computed
 with(Evans,indeptest(CHL[CDH==1],DBP[CDH==1],ties.break="rep_random",nb_tiebreak=100))
 }
 \seealso{

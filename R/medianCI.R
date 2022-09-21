@@ -3,8 +3,8 @@
 #' In the one sample case, compute the confidence interval for the median of the random variable. In the paired two sample case, compute the confidence interval for the median of the
 #' difference between the two random variables.
 #' @param x,y two continuous variables.
-#' @param paired a logical value. If it equals TRUE, you must provide values for \code{x} and \code{y}
-#' and the paired test is implemented. If it equals FALSE, only \code{x} must be provided.
+#' @param paired a logical value. If \code{paired=TRUE}, you must provide values for \code{x} and \code{y}
+#' and the paired test is implemented. If it equals \code{paired=FALSE}, only \code{x} must be provided.
 #' @param conf.level confidence level for the confidence interval.
 #' @details Provide the confidence interval for \code{Med(X)} in the one sample case and for \code{Med(X-Y)} in the two sample case.
 #' The confidence interval is based on the rank statistic.
@@ -16,7 +16,7 @@
 #' @export
 #' @examples
 #' #Simulations
-#' n=100
+#' n=100 #sample size
 #' M=2000 #number of replications
 #' res1=res2=res3=rep(NA,M)
 #' testone=function(n){
