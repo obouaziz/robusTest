@@ -16,12 +16,15 @@
 #' When Pearson's correlation test is used, a confidence interval for Pearson's correlation coefficient is also returned. This confidence interval has been implemented
 #' from the delta-method. It should be noted that this method is asymptotic and can display very narrow intervals for small sample sizes and thus can suffer from
 #' low coverage probabilities. We therefore recommend to use confidence intervals for Pearson's correlation coefficient only when n is at least larger than 100.
+#'
+#' The Kendall and Spearman correlation tests are not valid in the presence of ties in the \code{x} or \code{y} vector. If ties occur, they should be broken using the
+#' \code{ties.break} option. Note that they can also be broken outside \code{cortest} using the function \code{tiebreak}.
 #' @return Returns the result of the test with its corresponding p-value, the value of the test statistic and the estimated value of Pearson's correlation coefficient,
 #' Kendall's tau or Spearman's rho. For Pearson's correlation test an asymptotic confidence interval for the correlation coefficient is also returned.
 #' @note The option \code{ties.break} handles ties for both Kendall's and Spearman's test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
-#' Note that only ties inside each vector are broken (but not ties between vectors).
+#' Note that only ties inside each vector are broken (but not ties between the two vectors).
 #' @keywords test
-#' @seealso \code{\link{vartest}}, \code{\link{indeptest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
+#' @seealso \code{\link{vartest}}, \code{\link{indeptest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}, \code{\link{tiebreak}}.
 #' @importFrom stats cov pnorm pt qnorm qt runif sd var
 #' @export
 #' @examples

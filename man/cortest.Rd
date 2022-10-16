@@ -42,10 +42,13 @@ freedom is used.
 When Pearson's correlation test is used, a confidence interval for Pearson's correlation coefficient is also returned. This confidence interval has been implemented
 from the delta-method. It should be noted that this method is asymptotic and can display very narrow intervals for small sample sizes and thus can suffer from
 low coverage probabilities. We therefore recommend to use confidence intervals for Pearson's correlation coefficient only when n is at least larger than 100.
+
+The Kendall and Spearman correlation tests are not valid in the presence of ties in the \code{x} or \code{y} vector. If ties occur, they should be broken using the
+\code{ties.break} option. Note that they can also be broken outside \code{cortest} using the function \code{tiebreak}.
 }
 \note{
 The option \code{ties.break} handles ties for both Kendall's and Spearman's test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
-Note that only ties inside each vector are broken (but not ties between vectors).
+Note that only ties inside each vector are broken (but not ties between the two vectors).
 }
 \examples{
 #Application on the Evans dataset
@@ -120,6 +123,6 @@ mean(res5<0.05)
 mean(res6<0.05)
 }
 \seealso{
-\code{\link{vartest}}, \code{\link{indeptest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.
+\code{\link{vartest}}, \code{\link{indeptest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}, \code{\link{tiebreak}}.
 }
 \keyword{test}
