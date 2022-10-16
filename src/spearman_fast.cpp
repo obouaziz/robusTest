@@ -43,7 +43,7 @@ vector<size_t> invPerm(const vector<size_t>& sigma) {
 //'
 //' This is a fast function implemented in Rcpp.
 //' @param x,y the two sequences of vector that are applied to the function.
-//' @export
+
 // [[Rcpp::export]]
 List spearmanCore(const NumericVector& x, const NumericVector& y) {
   size_t n = x.size();

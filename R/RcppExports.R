@@ -17,7 +17,8 @@ NULL
 #'
 #' This is a fast function implemented in Rcpp.
 #' @param x,y the two sequences of vector that are applied to the function.
-#' @export
+NULL
+
 spearmanCore <- function(x, y) {
     .Call(`_robusTest_spearmanCore`, x, y)
 }

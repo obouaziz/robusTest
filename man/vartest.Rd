@@ -15,7 +15,7 @@ from the command \code{vartest(x~y,data=dataset)} with dataset the name of the d
 }
 \value{
 Returns the result of the test with its corresponding p-value and the value of the test statistic. In the two sample case, the function
-also returns the estimated value of the ratio of the two variances.
+also returns the confidence interval for the difference of the two variances.
 }
 \description{
 Tests the equality of variance for continuous independent samples using Welch's ANOVA on the square of the centered variables.

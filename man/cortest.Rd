@@ -36,10 +36,12 @@ Three tests are implemented. The null hypothesis for the corrected Pearson test 
 The alternative is specified by the \code{alternative} argument. The null hypothesis for the corrected Kendall test is: H0 tau=0 where tau represents Kendall's tau coefficient.
 The null hypothesis for the corrected Spearman test is: H0 rho=0 where rho represents Spearman's rho coefficient.
 All tests are asymptotically well calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test.
+For the Pearson test, the exact distribution of the test statistic under the Gaussian case has been tabulated for n<130. For n>=130, the Student distribution with n-2 degrees of
+freedom is used.
 
 When Pearson's correlation test is used, a confidence interval for Pearson's correlation coefficient is also returned. This confidence interval has been implemented
 from the delta-method. It should be noted that this method is asymptotic and can display very narrow intervals for small sample sizes and thus can suffer from
-low coverage probabilities. We therefore advocate to use confidence intervals for Pearson's correlation coefficient only when n is at least larger than 100.
+low coverage probabilities. We therefore recommend to use confidence intervals for Pearson's correlation coefficient only when n is at least larger than 100.
 }
 \note{
 The option \code{ties.break} handles ties for both Kendall's and Spearman's test. If \code{ties.break="none"} the ties are ignored, if \code{ties.break="random"} they are randomly broken.
@@ -74,7 +76,8 @@ Y=X^2+0.3*epsi
 list(test1=cortest(X,Y)$p.value,test2=cor.test(X,Y)$p.value) #cor.test is the standard Pearson test
 }
 res1=res2=rep(NA,M)
-# Replications in order to check if the the corrected Pearson test and the standard test are well calibrated
+# Replications in order to check if the the corrected Pearson test and
+# the standard test are well calibrated
 for (i in 1:M)
 {
 result=testone(n)
@@ -84,7 +87,7 @@ res2[i]=result$test2
 mean(res1<0.05)  #0.0495
 mean(res2<0.05)  #0.3674
 
-#Replications with Kendall's test (takes long time to run)
+#Replications with Kendall's test (may take a few minutes to run)
 M=1000
 testone=function(n){
 X=rnorm(n,0,1)
@@ -92,23 +95,29 @@ epsi=rnorm(n,0,1)
 Y=X^2+0.3*epsi
 list(test1=cortest(X,Y)$p.value,test2=cor.test(X,Y)$p.value,
 test3=cortest(X,Y,method="kendall")$p.value,
-test4=cor.test(X,Y,method="kendall")$p.value)
-#cor.test is the standard Pearson or Kendall correlation test
+test4=cor.test(X,Y,method="kendall")$p.value,
+test5=cortest(X,Y,method="spearman")$p.value,
+test6=cor.test(X,Y,method="spearman")$p.value)
+#cor.test is the standard Pearson, Kendall or Spearman correlation test
 }
-res1=res2=res3=res4=rep(NA,M)
+res1=res2=res3=res4=res5=res6=rep(NA,M)
 # Replications to check if the tests are well calibrated
 for (i in 1:M)
 {
 result=testone(n)
 res1[i]=result$test1
 res2[i]=result$test2
-#res3[i]=result$test3
-#res4[i]=result$test4
+res3[i]=result$test3
+res4[i]=result$test4
+res5[i]=result$test5
+res6[i]=result$test6
 }
-mean(res1<0.05)  #0.039
-mean(res2<0.05)  #0.346
-#mean(res3<0.05) #0.044
-#mean(res4<0.05) #0.154
+mean(res1<0.05)
+mean(res2<0.05)
+mean(res3<0.05)
+mean(res4<0.05)
+mean(res5<0.05)
+mean(res6<0.05)
 }
 \seealso{
 \code{\link{vartest}}, \code{\link{indeptest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}.

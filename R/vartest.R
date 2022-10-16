@@ -10,7 +10,7 @@
 #' The test uses Welch's ANOVA procedure on the variables \eqn{(x_i-mean(x))^2}, \eqn{(y_i-mean(y))^2} and is asymptotically well calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test.
 #' The test can be applied to more than two groups in which case it tests if all groups have the same variance.
 #' @return Returns the result of the test with its corresponding p-value and the value of the test statistic. In the two sample case, the function
-#' also returns the estimated value of the ratio of the two variances.
+#' also returns the confidence interval for the difference of the two variances.
 #' @note The function can also be called using formulas: type \code{vartest(x~y,data)} with x the quantitative variable
 #' and y a factor variable with two or more levels. For more than two groups, only the formula is valid.
 #' @keywords test
@@ -76,19 +76,19 @@ vartest.formula <- function(x,y,data=list(),...)#,alternative="two.sided"
 #' @export
 print.vartest <- function(x, ...)
 {
-  varval=x$estimate[1]/x$estimate[2]
-  names(varval)<-"variance"
+  varval=c(round(x$estimate[1],6),round(x$estimate[2],6))
+  names(varval)<-c("variance of x", "variance of y") #ratio of variances"
   cat("\nCorrected F test to compare two variances\n\n")
   cat(paste("F = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))
   if (x$alternative=="two.sided" | x$alternative=="t"){
-    cat("alternative hypothesis: true ratio of variance is not equal to 1\n")}
+    cat("alternative hypothesis: true difference of variances is not equal to 0\n")}#ratio
   if (x$alternative=="less" | x$alternative=="l"){
-    cat("alternative hypothesis: true ratio of variance is less than 1\n")}
+    cat("alternative hypothesis: true difference of variances is less than 0\n")}
   if (x$alternative=="greater" | x$alternative=="g"){
-    cat("alternative hypothesis: true ratio of variance is greater than 1\n")}
-  cat(paste(x$conf.level," % percent confidence interval:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
+    cat("alternative hypothesis: true difference of variances is greater than 0\n")}
+  cat(paste(x$conf.level*100," % percent confidence interval:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
   cat("sample estimates:\n")
-  cat("ratio of variances\n")
+  #cat("ratio of variances\n")
   print(varval)
 }
 
