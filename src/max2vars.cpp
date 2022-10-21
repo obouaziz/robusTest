@@ -30,7 +30,6 @@ vector<size_t> argsort(const NumericVector& v) {
   return idx;
 }
 
-
 // [[Rcpp::export]]
 double max2D_cpp(NumericVector const& x, NumericVector const& y) {
   size_t n = x.size();

@@ -4,19 +4,21 @@
 #' difference between the two random variables is equal to 0.
 #' @param x,y two continuous variables.
 #' @param alternative indicates the alternative hypothesis and must be one of "two.sided", "greater" or "less".
-#' @param paired a logical value. If \code{paired=TRUE}, you must provide values for \code{x} and \code{y}
+#' @param paired a logical value. If \code{paired=TRUE}, the user must provide values for \code{x} and \code{y}
 #' and the paired test is implemented. If \code{paired=FALSE}, only \code{x} must be provided.
 #' @details The null hypothesis for the one sample median test is: H0 Med(X)=0 where Med represents the median.
 #' The alternative is specified by the \code{alternative} argument: "\code{greater}" means that Med(X)>0, "\code{less}"
 #'  means that Med(X)<0 and "\code{two.sided} means that Med(X) is different from 0. The null hypothesis for the paired median test is: H0 Med(X-Y)=0. Both tests are asymptotically
 #'  calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test. The
-#'  test is based on the asymptotic distribution of the empirical median and uses a kernel estimator to estimate the density of \code{X} (in the one sample case)
-#'  or of \code{X-Y} (in the two sample case) at 0.
-#' @note The paired median test can be implemented by providing the variables \code{x} and \code{y} or by just providing
-#' one vector equal to the difference between \code{x} and \code{y}.
+#'  test is based on the asymptotic distribution of the empirical median based on the rank statistics. The procedure is described in \emph{Asymptotic Statistics} from
+#'  A. W. Van der Vaart, 1998.
+#' @note The paired median test can be implemented either by providing the variables \code{x} and \code{y} with \code{paired=TRUE} or by just providing
+#' one vector equal to the difference between \code{x} and \code{y} with \code{paired=FALSE}.
 #' @return Returns the result of the test with its corresponding p-value and the value of the test statistic.
 #' @keywords test
 #' @seealso \code{\link{cortest}}, \code{\link{indeptest}}, \code{\link{vartest}}, \code{\link{wilcoxtest}}.
+#' @author See \emph{Asymptotic Statistics}.
+#' A. W. Van der Vaart, 1998.
 #' @export
 #' @examples
 #' #Simulations
@@ -36,10 +38,11 @@
 #' mean(res1<0.05) #0.048
 #' mean(res2<0.05) # 0.04
 
-mediantest <- function(x,y=NULL,alternative="two.sided",paired=FALSE) {UseMethod("mediantest")}
+mediantest <- function(x,y=NULL,alternative="two.sided",paired=FALSE,conf.level=0.95) {UseMethod("mediantest")}
 #' @export
-mediantest.default=function(x,y=NULL,alternative="two.sided",paired=FALSE)
+mediantest.default=function(x,y=NULL,alternative="two.sided",paired=FALSE,conf.level=0.95)
 {
+  alpha=1-conf.level
   if (paired==TRUE)
   {
     if (is.null(y)){ stop("'y' is missing for paired test")}
@@ -47,6 +50,7 @@ mediantest.default=function(x,y=NULL,alternative="two.sided",paired=FALSE)
     if (length(x)!=length(y)){stop("'x' and 'y' should have the same size for the paired median test")}
     #Perform the paired two sample test
     X <- x-y
+    medX <- stats::median(X)
     pairedTest<-TRUE
   }
   if (paired==FALSE)
@@ -54,20 +58,24 @@ mediantest.default=function(x,y=NULL,alternative="two.sided",paired=FALSE)
     if (is.null(x)) stop("'x' is missing")
     if (is.null(y)==FALSE) stop("there should be no 'y' for the one sample median test")
     X<-x
+    medX <- stats::median(X)
     pairedTest<-FALSE
   }
   n <- length(X)
-  z <- stats::density(X, kernel="rectangular",n=2000)
-  xab <- which.min(abs(z$x))
-  medX=stats::median(X)
-  Tn <- 2*z$y[xab]*sqrt(n)*medX
+  y<-stats::ecdf(X)
+  k=n*y(0)+1
+  xsort <- sort(x)
+  CIl <- xsort[ceiling(-stats::qnorm(1-alpha/2)*sqrt(n)/2+n/2)]
+  CIr <- xsort[ceiling(stats::qnorm(1-alpha/2)*sqrt(n)/2+n/2)]
   if (alternative=="two.sided" | alternative=="t"){
-    Pval <- 2*(1-pnorm(abs(Tn)))}
+    alpha1<-2*(1-stats::pnorm((2*k-n-0.5)/sqrt(n)))
+    alpha2<-2*(1-stats::pnorm((n-2*k+0.5)/sqrt(n)))
+    Pval <- min(alpha1, alpha2)}
   if (alternative=="less"| alternative=="l"){
-    Pval <- pnorm(Tn)}
+    Pval <- 1-stats::pnorm((2*k-n-1.8)/sqrt(n))}
   if (alternative=="greater"| alternative=="g"){
-    Pval <- 1-pnorm(Tn)}
-  result <- list(statistic=Tn, p.value=Pval,estimate=medX, alternative=alternative,pairedTest=pairedTest)
+    Pval <- 1-stats::pnorm((n-2*k+2.1)/sqrt(n))}
+  result <- list(p.value=Pval,CI=c(CIl,CIr),conf.level=conf.level,estimate=medX, alternative=alternative,pairedTest=pairedTest)
   class(result)<-"mediantest"
   return(result)
 }
@@ -78,9 +86,11 @@ print.mediantest <- function(x, ...)
   medval=x$estimate
   if (x$pairedTest==FALSE){
     cat("\nMedian test for the on sample case\n\n")
-    cat(paste("Tn = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))
+    cat(paste("p-value = ",round(x$p.value,4),"\n",sep= ""))
     if (x$alternative=="two.sided" | x$alternative=="t"){
-      cat("alternative hypothesis: median (X) is not equal to zero\n")}
+      cat("alternative hypothesis: median (X) is not equal to zero\n")
+      cat(paste(x$conf.level*100," % asymptotic confidence interval for the median:","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
+      }
     if (x$alternative=="less" | x$alternative=="l"){
       cat("alternative hypothesis: median (X) is negative\n")}
     if (x$alternative=="greater" | x$alternative=="g"){
@@ -90,9 +100,11 @@ print.mediantest <- function(x, ...)
   }
   if (x$pairedTest==TRUE){
     cat("\nMedian test for the two sample case\n\n")
-    cat(paste("Tn = ", round(x$statistic,4), ", " , "p-value = ",round(x$p.value,4),"\n",sep= ""))
+    cat(paste("p-value = ",round(x$p.value,4),"\n",sep= ""))
     if (x$alternative=="two.sided" | x$alternative=="t"){
-      cat("alternative hypothesis: median (X-Y) is not equal to zero\n")}
+      cat("alternative hypothesis: median (X-Y) is not equal to zero\n")
+      cat(paste(x$conf.level*100," % asymptotic confidence interval for median (X-Y):","\n",round(x$CI[1],4),"  ",round(x$CI[2],4),"\n",sep=""))
+      }
     if (x$alternative=="less" | x$alternative=="l"){
       cat("alternative hypothesis: median (X-Y) is negative\n")}
     if (x$alternative=="greater" | x$alternative=="g"){

@@ -4,14 +4,20 @@
 \alias{mediantest}
 \title{Test for the median in the one and two sample paired tests}
 \usage{
-mediantest(x, y = NULL, alternative = "two.sided", paired = FALSE)
+mediantest(
+  x,
+  y = NULL,
+  alternative = "two.sided",
+  paired = FALSE,
+  conf.level = 0.95
+)
 }
 \arguments{
 \item{x, y}{two continuous variables.}
 
 \item{alternative}{indicates the alternative hypothesis and must be one of "two.sided", "greater" or "less".}
 
-\item{paired}{a logical value. If \code{paired=TRUE}, you must provide values for \code{x} and \code{y}
+\item{paired}{a logical value. If \code{paired=TRUE}, the user must provide values for \code{x} and \code{y}
 and the paired test is implemented. If \code{paired=FALSE}, only \code{x} must be provided.}
 }
 \value{
@@ -26,12 +32,12 @@ The null hypothesis for the one sample median test is: H0 Med(X)=0 where Med rep
 The alternative is specified by the \code{alternative} argument: "\code{greater}" means that Med(X)>0, "\code{less}"
 means that Med(X)<0 and "\code{two.sided} means that Med(X) is different from 0. The null hypothesis for the paired median test is: H0 Med(X-Y)=0. Both tests are asymptotically
 calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test. The
-test is based on the asymptotic distribution of the empirical median and uses a kernel estimator to estimate the density of \code{X} (in the one sample case)
-or of \code{X-Y} (in the two sample case) at 0.
+test is based on the asymptotic distribution of the empirical median based on the rank statistics. The procedure is described in \emph{Asymptotic Statistics} from
+A. W. Van der Vaart, 1998.
 }
 \note{
-The paired median test can be implemented by providing the variables \code{x} and \code{y} or by just providing
-one vector equal to the difference between \code{x} and \code{y}.
+The paired median test can be implemented either by providing the variables \code{x} and \code{y} with \code{paired=TRUE} or by just providing
+one vector equal to the difference between \code{x} and \code{y} with \code{paired=FALSE}.
 }
 \examples{
 #Simulations
@@ -53,5 +59,9 @@ mean(res2<0.05) # 0.04
 }
 \seealso{
 \code{\link{cortest}}, \code{\link{indeptest}}, \code{\link{vartest}}, \code{\link{wilcoxtest}}.
+}
+\author{
+See \emph{Asymptotic Statistics}.
+A. W. Van der Vaart, 1998.
 }
 \keyword{test}
