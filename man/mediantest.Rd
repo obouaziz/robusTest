@@ -2,7 +2,7 @@
 % Please edit documentation in R/mediantest.R
 \name{mediantest}
 \alias{mediantest}
-\title{Test for the median in the one and two sample paired tests}
+\title{Test for the median in the one and two-sample paired tests}
 \usage{
 mediantest(
   x,
@@ -21,18 +21,20 @@ mediantest(
 and the paired test is implemented. If \code{paired=FALSE}, only \code{x} must be provided.}
 }
 \value{
-Returns the result of the test with its corresponding p-value and the value of the test statistic.
+Returns the result of the test with its corresponding p-value and the value of median of X or of X-Y. The confidence interval is also displayed
+but only when \code{alternative=two.sided}.
 }
 \description{
 In the one sample case, test if the median of the random variable is equal to 0. In the paired two sample case, test if the median of the
-difference between the two random variables is equal to 0.
+difference between the two random variables is equal to 0. The function also returns the confidence interval for the median of the
+random variable in the one-sample case or for the median of the difference between the two random variables in the two-sample case.
 }
 \details{
 The null hypothesis for the one sample median test is: H0 Med(X)=0 where Med represents the median.
 The alternative is specified by the \code{alternative} argument: "\code{greater}" means that Med(X)>0, "\code{less}"
 means that Med(X)<0 and "\code{two.sided} means that Med(X) is different from 0. The null hypothesis for the paired median test is: H0 Med(X-Y)=0. Both tests are asymptotically
 calibrated in the sense that the rejection probability under the null hypothesis is asymptotically equal to the level of the test. The
-test is based on the asymptotic distribution of the empirical median based on the rank statistics. The procedure is described in \emph{Asymptotic Statistics} from
+test and the confidence interval are based on the asymptotic distribution of the empirical median based on the rank statistics. The procedure is described in \emph{Asymptotic Statistics} from
 A. W. Van der Vaart, 1998.
 }
 \note{
@@ -41,6 +43,11 @@ one vector equal to the difference between \code{x} and \code{y} with \code{pair
 }
 \examples{
 #Simulations
+x <- rexp(200)-log(2)
+mediantest(x)
+x <- rexp(200)-log(2)+0.2
+mediantest(x,alternative="greater")
+
 n=100 #sample size
 M=1000 #number of replications
 res1=res2=rep(NA,M)
