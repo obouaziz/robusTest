@@ -60,7 +60,7 @@ For \eqn{n>=751}, the distribution with n=1000 is used. Those tables were comput
 Only a two sided alternative is possible with this test. Missing values are removed such that if a value
 of \code{x} (resp. \code{y}) is missing then the corresponding
 values of both \code{x} and \code{y} are removed. The test is then implemented on the remaining elements. If \code{ties.break="none"} the ties are ignored, putting
-mass (nb of ties)/n at tied observations in the computation of the empirical cumulative distribution functions.
+mass (number of ties)/n at tied observations in the computation of the empirical cumulative distribution functions.
 If \code{ties.break="random"} they are randomly broken. If \code{ties.break="rep_random"} they are randomly broken \code{nb_tiebreak}
 times where \code{nb_tiebreak} is a parameter of the function. In that case, the test statistic and the p values are computed by taking
 the average over all replications.
