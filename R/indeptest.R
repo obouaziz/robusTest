@@ -11,7 +11,7 @@
 #' @param ties.break the method used to break ties in case there are ties in the x or y vectors. Can be \code{"none"},
 #' \code{"random"} or \code{"rep_random"}.
 #' @param nb_tiebreak the number of repetition for breaking the ties when \code{ties.break="rep_random"}.
-#' @details For two continuous variables, indeptest tests H0 X and Y are independent
+#' @details For two continuous variables, \code{indeptest} tests H0 X and Y are independent
 #' against H1 X and Y are not independent.
 #'
 #' For observations (x1,y1), ..., (x_n,y_n), the bivariate e.c.d.f.
@@ -29,7 +29,7 @@
 #'by choosing simu=FALSE. In the latter case, the exact distribution is estimated for n=1, ...,150. For \eqn{151<=n<=175}, the
 #'distribution with n=150 is used. For \eqn{176<=n<=250}, the distribution with n=200 is used.
 #'For \eqn{251<=n<=400}, the distribution with n=300 is used. For \eqn{401<=n<=750}, the distribution with n=500 is used.
-#'For \eqn{n>=751}, the distribution with n=1000 is used. Those tables were computed using 1e^5 replications.
+#'For \eqn{n>=751}, the distribution with n=1000 is used. Those tables were computed using 2e^5 replications in Monte-Carlo simulations.
 #' @return Returns the result of the test with its corresponding p-value and the value of the test statistic.
 #' @note Only a two sided alternative is possible with this test. Missing values are removed such that if a value
 #' of \code{x} (resp. \code{y}) is missing then the corresponding
@@ -177,51 +177,57 @@ pval_comput<-function(x,y,simu=FALSE,N=50000){
     #load(paste("ecdf",n,".Rdata",sep=""))#Tables/
     if (3<=n & n<=150)
     {
-      x1<-robust_table_indep[[n]]$x
-      y1<-robust_table_indep[[n]]$y
-      #y1<-robust_table[[n]]$y
-      ##load(system.file(paste("data_tables/ecdf",n,".RData",sep=""),package="testRcpp"))
-      ##data(list=paste("ecdf",n,sep=""))
+      x1<-robust_table_indep[[n]]#$x
+      y1 <- (c(1:5e5)/5e5)[c(seq(20,1e5,by=2000),seq(1e5+200,5e5,by=200))]
+      #y1<-robust_table_indep[[n]]$y
+      ##y1<-robust_table[[n]]$y
+      ###load(system.file(paste("data_tables/ecdf",n,".RData",sep=""),package="testRcpp"))
+      ###data(list=paste("ecdf",n,sep=""))
     } else {
       if (151<=n & n<=175)
       {
-        x1<-robust_table_indep[[150]]$x
-        y1<-robust_table_indep[[150]]$y
-        #y1<-robust_table[[150]]$y
-        ##load(system.file("data_tables/ecdf150.RData",package="testRcpp"))
-        ##data(ecdf150)
+        x1<-robust_table_indep[[150]]#$x
+        y1 <- (c(1:5e5)/5e5)[c(seq(20,1e5,by=2000),seq(1e5+200,5e5,by=200))]
+        # y1<-robust_table_indep[[150]]$y
+        # #y1<-robust_table[[150]]$y
+        # ##load(system.file("data_tables/ecdf150.RData",package="testRcpp"))
+        # ##data(ecdf150)
       } else {
         if (176<=n & n<=250)
         {
-          x1<-robust_table_indep[[151]]$x
-          y1<-robust_table_indep[[151]]$y
-          #y1<-robust_table[[151]]$y
-          ##load(system.file("data_tables/ecdf200.RData",package="testRcpp"))
-          ##data(ecdf200)
+          x1<-robust_table_indep[[200]]#robust_table_indep[[151]]$x
+          y1 <- (c(1:5e5)/5e5)[c(seq(20,1e5,by=2000),seq(1e5+200,5e5,by=200))]
+          # y1<-robust_table_indep[[151]]$y
+          # #y1<-robust_table[[151]]$y
+          # ##load(system.file("data_tables/ecdf200.RData",package="testRcpp"))
+          # ##data(ecdf200)
         } else {
           if (251<=n & n<=400)
           {
-            x1<-robust_table_indep[[152]]$x
-            y1<-robust_table_indep[[152]]$y
-            #y1<-robust_table[[152]]$y
-            ##load(system.file("data_tables/ecdf300.RData",package="testRcpp"))
-            ##data(ecdf300)
+            x1<-robust_table_indep[[300]]#robust_table_indep[[152]]$x
+            y1 <- (c(1:5e5)/5e5)[c(seq(20,1e5,by=2000),seq(1e5+200,5e5,by=200))]
+            # y1<-robust_table_indep[[152]]$y
+            # #y1<-robust_table[[152]]$y
+            # ##load(system.file("data_tables/ecdf300.RData",package="testRcpp"))
+            # ##data(ecdf300)
           } else {
             if (401<=n & n<=750)
             {
-              x1<-robust_table_indep[[153]]$x
-              y1<-robust_table_indep[[153]]$y
-              #y1<-robust_table[[153]]$y
-              ##load(system.file("data_tables/ecdf500.RData",package="testRcpp"))
-              ##data(ecdf500)
+              x1<-robust_table_indep[[500]]#robust_table_indep[[153]]$x
+              y1 <- (c(1:5e5)/5e5)[c(seq(20,1e5,by=2000),seq(1e5+200,5e5,by=200))]
+              # y1<-robust_table_indep[[153]]$y
+              # #y1<-robust_table[[153]]$y
+              # ##load(system.file("data_tables/ecdf500.RData",package="testRcpp"))
+              # ##data(ecdf500)
             } else {
               if (751<=n)
               {
-                x1<-robust_table_indep[[154]]$x
-                y1<-robust_table_indep[[154]]$y
-                #y1<-robust_table[[154]]$y
-                ##load(system.file("data_tables/ecdf1000.RData",package="testRcpp"))
-                ##data(ecdf1000)
+                x1<-robust_table_indep[[1000]]#robust_table_indep[[154]]$x
+                y1 <- (c(1:5e5)/5e5)[c(seq(20,1e5,by=2000),seq(1e5+200,5e5,by=200))]
+                # y1<-robust_table_indep[[154]]$y
+                # #y1<-robust_table[[154]]$y
+                # ##load(system.file("data_tables/ecdf1000.RData",package="testRcpp"))
+                # ##data(ecdf1000)
               }
             }
           }

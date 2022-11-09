@@ -91,7 +91,7 @@ mean(res1<0.05)  #0.0495
 mean(res2<0.05)  #0.3674
 
 #Replications with Kendall's test (may take a few minutes to run)
-M=1000
+M=500
 testone=function(n){
 X=rnorm(n,0,1)
 epsi=rnorm(n,0,1)

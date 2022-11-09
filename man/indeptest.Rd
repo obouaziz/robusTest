@@ -36,7 +36,7 @@ between the joint empirical cumulative distribution function and the product of 
 empirical cumulative distribution functions.
 }
 \details{
-For two continuous variables, indeptest tests H0 X and Y are independent
+For two continuous variables, \code{indeptest} tests H0 X and Y are independent
 against H1 X and Y are not independent.
 
 For observations (x1,y1), ..., (x_n,y_n), the bivariate e.c.d.f.
@@ -54,7 +54,7 @@ perform the Monte-Carlo simulation (with N the number of replications) or simply
 by choosing simu=FALSE. In the latter case, the exact distribution is estimated for n=1, ...,150. For \eqn{151<=n<=175}, the
 distribution with n=150 is used. For \eqn{176<=n<=250}, the distribution with n=200 is used.
 For \eqn{251<=n<=400}, the distribution with n=300 is used. For \eqn{401<=n<=750}, the distribution with n=500 is used.
-For \eqn{n>=751}, the distribution with n=1000 is used. Those tables were computed using 1e^5 replications.
+For \eqn{n>=751}, the distribution with n=1000 is used. Those tables were computed using 2e^5 replications in Monte-Carlo simulations.
 }
 \note{
 Only a two sided alternative is possible with this test. Missing values are removed such that if a value

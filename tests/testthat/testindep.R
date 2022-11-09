@@ -33,7 +33,7 @@ result=indeptest(x,y)
 
 test_that("Independent test on deterministic (n=150) sample",{
   expect_equal(round(result$statistic,4),0.6695)
-  expect_equal(round(result$p.value,4),0.2141)
+  expect_equal(round(result$p.value,3),0.214)
 })
 
 # n=40

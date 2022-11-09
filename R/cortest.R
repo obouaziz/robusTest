@@ -69,7 +69,7 @@
 #' mean(res2<0.05)  #0.3674
 #'
 #' #Replications with Kendall's test (may take a few minutes to run)
-#' M=1000
+#' M=500
 #' testone=function(n){
 #' X=rnorm(n,0,1)
 #' epsi=rnorm(n,0,1)
@@ -311,10 +311,12 @@ pval_pear_alt_two<-function(Tn,n)
 {
   if (n<=129){
     y1<-(1:(2e5))/(2e5)
-    y1<-y1[seq(1,2e5,by=6)]
+    y1<-y1[c(seq(10,40000,by=40),seq(40000,160000,by=600),seq(160040,2e5,by=40))]
+    #y1<-y1[seq(1,2e5,by=6)]
     x1<-robust_Pearson_table[[n]]
     funstep<-stats::stepfun(x1,c(0,y1))
-    Pval<-2*(1-funstep(abs(Tn)))
+    Pval<-1-funstep(abs(Tn))+funstep(-abs(Tn))
+    #2*(1-funstep(abs(Tn)))
   } else {
     Pval <- 2*(1-pt(abs(Tn),n-2))
   }
@@ -325,7 +327,8 @@ pval_pear_alt_less<-function(Tn,n)
 {
   if (n<=129){
     y1<-(1:(2e5))/(2e5)
-    y1<-y1[seq(1,2e5,by=6)]
+    y1<-y1[c(seq(10,40000,by=40),seq(40000,160000,by=600),seq(160040,2e5,by=40))]
+    #y1<-y1[seq(1,2e5,by=6)]
     x1<-robust_Pearson_table[[n]]
     funstep<-stats::stepfun(x1,c(0,y1))
     Pval<-funstep(Tn)
@@ -339,7 +342,8 @@ pval_pear_alt_great<-function(Tn,n)
 {
   if (n<=129){
     y1<-(1:(2e5))/(2e5)
-    y1<-y1[seq(1,2e5,by=6)]
+    y1<-y1[c(seq(10,40000,by=40),seq(40000,160000,by=600),seq(160040,2e5,by=40))]
+    #y1<-y1[seq(1,2e5,by=6)]
     x1<-robust_Pearson_table[[n]]
     funstep<-stats::stepfun(x1,c(0,y1))
     Pval<-1-funstep(Tn)
