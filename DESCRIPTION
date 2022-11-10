@@ -1,5 +1,5 @@
 Package: robusTest
-Title: Calibrated correlation, two-sample tests
+Title: Calibrated Correlation, Two-Sample Tests
 Version: 1.0.0
 Authors@R: 
     person(given = "Olivier",

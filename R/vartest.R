@@ -26,6 +26,7 @@
 #'
 #' #Similar pvalues between var.test and vartest
 #'
+#' \dontrun{
 #' #Simulated data
 #' n=60 #sample size
 #' M=10000 #number of replications
@@ -43,7 +44,7 @@
 #' res2[i]=result$test2
 #' }
 #' mean(res1<0.05)  #0.0515
-#' mean(res2<0.05)  #0.1509
+#' mean(res2<0.05)  #0.1509}
 #'
 
 vartest <- function(x,y,...) {UseMethod("vartest")}#alternative="two.sided",conf.level=0.95,data=list(),...

@@ -40,6 +40,7 @@ vartest(CHL~CDH,data=Evans) #using formulas
 
 #Similar pvalues between var.test and vartest
 
+\dontrun{
 #Simulated data
 n=60 #sample size
 M=10000 #number of replications
@@ -57,7 +58,7 @@ res1[i]=result$test1
 res2[i]=result$test2
 }
 mean(res1<0.05)  #0.0515
-mean(res2<0.05)  #0.1509
+mean(res2<0.05)  #0.1509}
 
 }
 \seealso{

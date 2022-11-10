@@ -69,6 +69,7 @@ cortest(X,Y,method="kendall")
 cor.test(X,Y,method="spearman")
 cortest(X,Y,method="spearman")
 
+\dontrun{
 #Simulated data
 n=100 #sample size
 M=10000 #number of replications
@@ -87,9 +88,10 @@ result=testone(n)
 res1[i]=result$test1
 res2[i]=result$test2
 }
-mean(res1<0.05)  #0.0495
-mean(res2<0.05)  #0.3674
+mean(res1<0.05)
+mean(res2<0.05)}
 
+\dontrun{
 #Replications with Kendall's test (may take a few minutes to run)
 M=500
 testone=function(n){
@@ -120,7 +122,7 @@ mean(res2<0.05)
 mean(res3<0.05)
 mean(res4<0.05)
 mean(res5<0.05)
-mean(res6<0.05)
+mean(res6<0.05)}
 }
 \seealso{
 \code{\link{vartest}}, \code{\link{indeptest}}, \code{\link{mediantest}}, \code{\link{wilcoxtest}}, \code{\link{tiebreak}}.

@@ -58,7 +58,7 @@ wilcoxtest(CHL~CDH,data=Evans) #using formulas
 wilcoxtest(CHL~CDH,data=Evans,ties.break="random")
 #the same test where ties are randomly broken
 
-
+\dontrun{
 #For independent samples
 n=100 #sample size
 M=1000 #number of replications
@@ -69,6 +69,8 @@ list(test1=wilcoxtest(X,Y)$p.value,test2=wilcox.test(X,Y)$p.value)
 #wilcox.test is the standard Wilcoxon test
 }
 
+#Simulation under the null hypothesis
+#(note that P(X>Y)=0.5)
 #Takes a few seconds to run
 res1=res2=rep(NA,M)
 for (i in 1:M)
@@ -77,9 +79,9 @@ result=testone(n)
 res1[i]=result$test1
 res2[i]=result$test2
 }
-mean(res1<0.05) #0.049
-mean(res2<0.05) #0.174
-
+mean(res1<0.05)
+mean(res2<0.05)}
+\dontrun{
 #For paired samples
 #We use the value of the median of a Gamma distributed variable with shape
 #parameter equal to 1/5 and scale parameter equal to 1. This value is
@@ -88,17 +90,20 @@ n=100 #sample size
 M=1000 #number of replications
 testone=function(n){
 D=rgamma(n,shape=1/10,scale=1)-qgamma(shape=1/5, scale=1, 0.5)/2
-list(test1=wilcoxtest(D)$p.value,test2=wilcox.test(D)$p.value)
+list(test1=wilcoxtest(D,ties.break = "random")$p.value,test2=wilcox.test(D)$p.value)
 #wilcox.test is the standard paired Wilcoxon test
 }
+#Simulation under the null hypothesis
+#(note that Med(D_1+D_2)=0)
+#Takes a few seconds to run
 for (i in 1:M)
 {
 result=testone(n)
 res1[i]=result$test1
 res2[i]=result$test2
 }
-mean(res1<0.05) #0.054
-mean(res2<0.05) #0.074
+mean(res1<0.05)
+mean(res2<0.05)}
 }
 \seealso{
 \code{\link{cortest}}, \code{\link{indeptest}}, \code{\link{mediantest}}, \code{\link{vartest}}.

@@ -21,7 +21,7 @@ The bidimensional e.c.d.f. (empirical cumulative distribution function) Fn is a 
 the number of tied observations at that value.
 
 For observations (x1,y1), ..., (x_n,y_n), Fn is defined as
-\deqn{Fn(t1,t2) = #{xi<=t1,yi<=t2}/n = 1/n sum_{i=1}^n Indicator(xi<=t1,yi<=t2)}
+\deqn{Fn(t1,t2) = 1/n sum_{i=1}^n Indicator(xi<=t1,yi<=t2)}
 }
 \note{
 Missing values are removed such that if a value of \code{x} (resp. \code{y}) is missing then the corresponding

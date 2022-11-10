@@ -41,7 +41,7 @@ against H1 X and Y are not independent.
 
 For observations (x1,y1), ..., (x_n,y_n), the bivariate e.c.d.f.
 (empirical cumulative distribution function) Fn is defined as:
-\deqn{Fn(t1,t2) = #{xi<=t1,yi<=t2}/n = sum_{i=1}^n Indicator(xi<=t1,yi<=t2)/n.}
+\deqn{Fn(t1,t2) = sum_{i=1}^n Indicator(xi<=t1,yi<=t2)/n.}
 
 Let Fn(t1) and Fn(t2) be the marginals e.c.d.f. The test statistic is defined as:
 \deqn{n^(1/2) sup_{t1,t2} |Fn(t1,t2)-Fn(t1)*Fn(t2)|.}

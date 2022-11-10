@@ -6,7 +6,7 @@
 #' the number of tied observations at that value.
 #'
 #' For observations (x1,y1), ..., (x_n,y_n), Fn is defined as
-#' \deqn{Fn(t1,t2) = #{xi<=t1,yi<=t2}/n = 1/n sum_{i=1}^n Indicator(xi<=t1,yi<=t2)}
+#' \deqn{Fn(t1,t2) = 1/n sum_{i=1}^n Indicator(xi<=t1,yi<=t2)}
 #'
 #' @return The result is returned as a matrix of dimension (n*n) where the entry (i,j) corresponds to Fn(xi,yj), i=1, ...,n,
 #' j=1, ...,n.
