@@ -26,7 +26,7 @@
 #'
 #' #Similar pvalues between var.test and vartest
 #'
-#' \dontrun{
+#' \donttest{
 #' #Simulated data
 #' n=60 #sample size
 #' M=10000 #number of replications

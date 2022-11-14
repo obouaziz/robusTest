@@ -58,7 +58,7 @@ wilcoxtest(CHL~CDH,data=Evans) #using formulas
 wilcoxtest(CHL~CDH,data=Evans,ties.break="random")
 #the same test where ties are randomly broken
 
-\dontrun{
+\donttest{
 #For independent samples
 n=100 #sample size
 M=1000 #number of replications
@@ -81,7 +81,7 @@ res2[i]=result$test2
 }
 mean(res1<0.05)
 mean(res2<0.05)}
-\dontrun{
+\donttest{
 #For paired samples
 #We use the value of the median of a Gamma distributed variable with shape
 #parameter equal to 1/5 and scale parameter equal to 1. This value is

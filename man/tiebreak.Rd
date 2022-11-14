@@ -11,6 +11,10 @@ tiebreak(x, y = NULL, nb_break = FALSE)
 
 \item{nb_break}{if TRUE return also the number of values that have been broken}
 }
+\value{
+After breaking the ties, either returns the \code{x} variable as a vector or returns a list containing the \code{x} and \code{y}
+variables. If \code{nb_break=TRUE}, the number of values that have been broken is also an element of the list.
+}
 \description{
 If the vector contains ties (either inside a single or between two vectors), the function breaks them using a random perturbation.
 }

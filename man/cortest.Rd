@@ -69,7 +69,7 @@ cortest(X,Y,method="kendall")
 cor.test(X,Y,method="spearman")
 cortest(X,Y,method="spearman")
 
-\dontrun{
+\donttest{
 #Simulated data
 n=100 #sample size
 M=10000 #number of replications
@@ -91,7 +91,7 @@ res2[i]=result$test2
 mean(res1<0.05)
 mean(res2<0.05)}
 
-\dontrun{
+\donttest{
 #Replications with Kendall's test (may take a few minutes to run)
 M=500
 testone=function(n){
