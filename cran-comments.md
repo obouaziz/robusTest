@@ -4,16 +4,14 @@ There were no ERRORs, WARNINGs or NOTEs.
 ## Downstream dependencies
 The package depends on the Rcpp library.
 
-This is my first submission.
+This is a re-submission following the initial CRAN submission: commit 371eecc
 
 ## Resubmission
-This is a resubmission. In this version I have:
+This resubmission fixes very minor patches. In this version I have:
 
-- changed the \dontrun commands to \donttest.
+- added the arXiv link to the scientific paper.
 
-- added a value section to the tiebreak.Rd file.
+- changed minor details in the Description and Readme files.
 
-There is currently no reference paper for the package as the companion paper has not 
-yet been submitted. I plan to submit an arXiv version of the paper in a near future.
 
 
