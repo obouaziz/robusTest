@@ -1,6 +1,6 @@
 Package: robusTest
 Title: Calibrated Correlation and Two-Sample Tests
-Version: 1.0.1
+Version: 1.1.0
 Authors@R: 
     c(person(given = "Olivier",
            family = "Bouaziz",
